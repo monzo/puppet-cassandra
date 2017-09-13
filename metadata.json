@@ -1,12 +1,12 @@
 {
   "name": "locp-cassandra",
-  "version": "2.6.0",
+  "version": "999.999.999",
   "author": "locp",
   "summary": "Installs Cassandra & DataStax Agent on RHEL/Ubuntu/Debian.",
   "license": "Apache-2.0",
   "source": "https://github.com/locp/cassandra",
   "project_page": "https://github.com/locp/cassandra",
-  "issues_url": "https://github.com/locp/cassandra/issues",
+  "issues_url": "https://github.com/voxpupuli/cassandra/issues",
   "tags": [
     "Apache",
     "cassandra",
