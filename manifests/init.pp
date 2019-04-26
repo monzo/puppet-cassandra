@@ -68,6 +68,7 @@ class cassandra (
   $fail_on_non_supported_os                             = true,
   $fail_on_non_suppoted_os                              = undef,
   $file_cache_size_in_mb                                = undef,
+  $heap_dump_directory                                  = undef,
   $hinted_handoff_enabled                               = true,
   $hinted_handoff_throttle_in_kb                        = 1024,
   $hints_directory                                      = undef,
