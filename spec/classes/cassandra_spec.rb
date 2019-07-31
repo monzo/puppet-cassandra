@@ -116,6 +116,8 @@ describe 'cassandra' do
         'partitioner' => 'org.apache.cassandra.dht.Murmur3Partitioner',
         'permissions_cache_max_entries' => 1000,
         'permissions_validity_in_ms' => 2000,
+        'roles_cache_max_entries' => 1000,
+        'roles_validity_in_ms' => 2000,
         # 'prefer_local' => nil,
         'rack' => 'RAC1',
         'rackdc_tmpl' => 'cassandra/cassandra-rackdc.properties.erb',
