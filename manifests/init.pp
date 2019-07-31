@@ -106,9 +106,12 @@ class cassandra (
   $package_name                                         = $::cassandra::params::cassandra_pkg,
   $partitioner
     = 'org.apache.cassandra.dht.Murmur3Partitioner',
-  $permissions_cache_max_size                           = 1000,
+  $permissions_cache_max_entries                        = 1000,
   $permissions_update_interval_in_ms                    = undef,
   $permissions_validity_in_ms                           = 2000,
+  $roles_cache_max_entries                              = 1000,
+  $roles_update_interval_in_ms                          = undef,
+  $roles_validity_in_ms                                 = 2000,
   $phi_convict_threshold                                = undef,
   $prefer_local                                         = undef,
   $rack                                                 = 'RAC1',
