@@ -76,6 +76,9 @@ authenticator: <%= @authenticator %>
 #   increase system_auth keyspace replication factor if you use this authorizer.
 authorizer: <%= @authorizer %>
 
+# Max number of entries allowed in the permissions cache.
+permissions_cache_max_size: <%= @permissions_cache_max_size %>
+
 # Validity period for permissions cache (fetching permissions can be an
 # expensive operation depending on the authorizer, CassandraAuthorizer is
 # one example). Defaults to 2000, set to 0 to disable.
