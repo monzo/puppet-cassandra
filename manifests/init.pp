@@ -153,6 +153,7 @@ class cassandra (
   $server_encryption_truststore_password                = 'cassandra',
   $service_enable                                       = true,
   $service_ensure                                       = 'running',
+  $service_managed                                      = true,
   $service_name                                         = 'cassandra',
   $service_provider                                     = undef,
   $service_refresh                                      = true,
@@ -239,12 +240,14 @@ class cassandra (
       }
       # Sleep after package install and before service resource to prevent
       # possible duplicate processes arising from CASSANDRA-2356.
-      exec { 'CASSANDRA-2356 sleep':
-        command     => "/bin/sleep ${cassandra_2356_sleep_seconds}",
-        refreshonly => true,
-        user        => 'root',
-        subscribe   => Package['cassandra'],
-        before      => Service['cassandra'],
+      if $service_managed {
+        exec { 'CASSANDRA-2356 sleep':
+          command     => "/bin/sleep ${cassandra_2356_sleep_seconds}",
+          refreshonly => true,
+          user        => 'root',
+          subscribe   => Package['cassandra'],
+          before      => Service['cassandra'],
+        }
       }
 
       group { 'cassandra':
@@ -345,7 +348,7 @@ class cassandra (
     }
   }
 
-  if $package_ensure != 'absent' and $package_ensure != 'purged' {
+  if $package_ensure != 'absent' and $package_ensure != 'purged' and $service_managed {
     if $service_refresh {
       service { 'cassandra':
         ensure    => $service_ensure,
