@@ -69,6 +69,7 @@ class cassandra (
   $fail_on_non_suppoted_os                              = undef,
   $file_cache_size_in_mb                                = undef,
   $heap_dump_directory                                  = undef,
+  $heap_dump_directory_mode                             = '0750',
   $hinted_handoff_enabled                               = true,
   $hinted_handoff_throttle_in_kb                        = 1024,
   $hints_directory                                      = undef,
@@ -337,6 +338,17 @@ class cassandra (
 
   cassandra::private::data_directory { $data_file_directories: }
 
+  if ! defined( File[$heap_dump_directory] ) {
+    file { $heap_dump_directory:
+      ensure  => directory,
+      owner   => 'cassandra',
+      group   => 'cassandra',
+      mode    => $heap_dump_directory_mode,
+      require => $data_dir_require,
+      before  => $data_dir_before,
+    }
+  }
+
   if ! defined( File[$saved_caches_directory] ) {
     file { $saved_caches_directory:
       ensure  => directory,
@@ -358,6 +370,7 @@ class cassandra (
           File[$commitlog_directory],
           File[$config_file],
           File[$data_file_directories],
+          File[$heap_dump_directory],
           File[$saved_caches_directory],
           File[$dc_rack_properties_file],
           Package['cassandra'],
@@ -372,6 +385,7 @@ class cassandra (
           File[$commitlog_directory],
           File[$config_file],
           File[$data_file_directories],
+          File[$heap_dump_directory],
           File[$saved_caches_directory],
           File[$dc_rack_properties_file],
           Package['cassandra'],
